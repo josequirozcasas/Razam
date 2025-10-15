@@ -1,0 +1,151 @@
+<?php
+
+/**
+ * @var $block \Razam\Coordinadora\Block\Tracking\Popup
+ */
+
+use Magento\Framework\View\Element\Template;
+
+$data = $block->getTrackingInfo();
+$trackingData = $data['trackingInfo'];
+?>
+<div class="page tracking">
+    <?php if (!empty($trackingData)) : ?>
+        <?php if ($data['isCustomCarrier']) :?>
+            <div class="tracking">
+                <div class="tracking__header">
+                    <div class="tracking__guide">
+                        <h2>
+                            Número de la guía: <strong><?= $trackingData['codigo_remision'] ?></strong>
+                        </h2>
+                    </div>
+                    <!-- <div class="tracking__date">
+                        <p>
+                            <?= $trackingData['fecha_texto'] ?>
+                        </p>
+                    </div> -->
+                </div>
+                <!-- <div class="tracking__content">
+                    <div class="tracking__state">
+                        <p>
+                            <strong>Estado del Envío: </strong><?= $trackingData['EstAct'] ?>
+                        </p>
+                    </div>
+                    <div class="tracking__info-container">
+                        <div class="tracking__info-container-title">
+                            <h3>Información del remitente/origen</h3>
+                        </div>
+                        <div class="tracking__info-container-content">
+                            <div class="tracking__info-container-item">
+                                <p class="tracking__info-container-title">Nombre</p>
+                                <p class="tracking__info-container-content"><?= $trackingData['NomRem'] ?></p>
+                            </div>
+                            <div class="tracking__info-container-item">
+                                <p class="tracking__info-container-title">Ciudad</p>
+                                <p class="tracking__info-container-content"><?= $trackingData['nombre_origen'] ?></p>
+                            </div>
+                            <div class="tracking__info-container-item">
+                                <p class="tracking__info-container-title">Dirección</p>
+                                <p class="tracking__info-container-content"><?= $trackingData['DirRem'] ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tracking__info-container">
+                        <div class="tracking__info-container-title">
+                            <h3>Información del destinatario/destino</h3>
+                        </div>
+                        <div class="tracking__info-container-content">
+                            <div class="tracking__info-container-item">
+                                <p class="tracking__info-container-title">Nombre</p>
+                                <p class="tracking__info-container-content"><?= $trackingData['persona_recibe'] ?></p>
+                            </div>
+                            <div class="tracking__info-container-item">
+                                <p class="tracking__info-container-title">Ciudad</p>
+                                <p class="tracking__info-container-content"><?= $trackingData['nombre_destino'] ?></p>
+                            </div>
+                            <div class="tracking__info-container-item">
+                                <p class="tracking__info-container-title">Dirección</p>
+                                <p class="tracking__info-container-content"><?= $trackingData['DirDes'] ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="tracking__detail">
+                    <h3>Historial</h3>
+                    <hr>
+                    <?php if (is_array($trackingData['estados'])) : ?>
+                        <ol>
+                            <?php foreach ($trackingData['estados'] as $infoMov) : ?>
+                                <?php foreach ($infoMov as $info) : ?>
+                                    <li>
+                                        <div>
+                                            <p><strong><?= $info['fecha_texto'] ?></strong></p>
+                                            <p><?= $info['hora_ap'] ?></p>
+                                            <p><?= $info['descripcion'] ?></p>
+                                        </div>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </ol>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php else : ?>
+            <?php foreach ($trackingData as $shipId => $result) : ?>
+                <?php if ($shipId) : ?>
+                    <div class="order subtitle caption"><?= /* @noEscape */ $block->escapeHtml(__('Shipment #')) . $shipId ?></div>
+                <?php endif; ?>
+                <?php if (!empty($result)) : ?>
+                    <?php foreach ($result as $counter => $track) : ?>
+                        <div class="table-wrapper">
+                            <?php
+                            $shipmentBlockIdentifier = $shipId . '.' . $counter;
+                            $block->addChild('shipping.tracking.details.' . $shipmentBlockIdentifier, Template::class, [
+                                'track' => $track,
+                                'template' => 'Magento_Shipping::tracking/details.phtml',
+                                'storeSupportEmail' => $block->getStoreSupportEmail()
+                            ]);
+                            ?>
+                            <?= /* @noEscape */ $block->getChildHtml('shipping.tracking.details.' . $shipmentBlockIdentifier) ?>
+                        </div>
+                        <?php if (is_object($track) && !empty($track->getProgressdetail())) : ?>
+                            <?php
+                            $block->addChild('shipping.tracking.progress.' . $shipmentBlockIdentifier, Template::class, [
+                                'track' => $track,
+                                'template' => 'Magento_Shipping::tracking/progress.phtml'
+                            ]);
+                            ?>
+                            <?= /* @noEscape */ $block->getChildHtml('shipping.tracking.progress.' . $shipmentBlockIdentifier) ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <div class="message info empty">
+                        <div><?= $block->escapeHtml(__('There is no tracking available for this shipment.')) ?></div>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    <?php else : ?>
+        <div class="message info empty">
+            <div><?= $block->escapeHtml(__('There is no tracking available.')) ?></div>
+        </div>
+    <?php endif; ?>
+    <div class="actions">
+        <button type="button"
+                title="<?= $block->escapeHtmlAttr(__('Close Window')) ?>"
+                class="action close"
+                onclick="window.close(); window.opener.focus();">
+            <span><?= $block->escapeHtml(__('Close Window')) ?></span>
+        </button>
+    </div>
+</div>
+<script>
+    require([
+        'jquery'
+    ], function (jQuery) {
+        /* hide the close button when the content doesn't open in a modal window */
+        if (window.opener === null || typeof window.opener === "undefined") {
+            jQuery('.actions button.close').hide();
+        }
+    });
+</script>

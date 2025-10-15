@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <action name="shipment_labels_download">
+                <settings>
+                    <url path="download/shipment/label"/>
+                    <type>shipment_labels_download_coordinadora</type>
+                    <label translate="true">Download Shipping Labels (Sticker Version)</label>
+                </settings>
+            </action>
+        </massaction>
+    </listingToolbar>
+</listing>

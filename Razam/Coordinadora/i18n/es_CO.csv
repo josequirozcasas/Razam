@@ -1,0 +1,18 @@
+"Your order is on its way", "Tu pedido está en camino", module, Razam_Coordinadora
+"Your order %s is on its way. Expected date: %s", "Tu pedido %s está en camino. Fecha prevista de entrega: %s" module, Razam_Coordinadora
+"Your order has been delivered", "Tu pedido ha sido entregado", module, Razam_Coordinadora
+"Your order %s has been delivered. Delivery date: %s", "Tu pedido %s ha sido entregado. Fecha de entrega: %s", module, Razam_Coordinadora
+"Tracking ID: %s", "ID de seguimiento: %s", module, Razam_Coordinadora
+"If you have questions about your order, you can email us at <a href="mailto:%s">%s</a>", "Si tienes dudas acerca del pedido, escríbenos a <a href="mailto:%s">%s</a>", module, Razam_Coordinadora
+"or call us at <a href="tel:%s">%s</a>", "o llámanos al <a href="tel:%s">%s</a>", module, Razam_Coordinadora
+"Your order has been delivered. Delivery date: %s", "Tu pedido ha sido entregado. Fecha de entrega: %s"
+"Guide number # ", "Número guía # "
+"Tracking number # ", "Número seguimiento #"
+"Guide number # %s", "Número guía # %s"
+"Tracking number # %s", "Número seguimiento # %s"
+"Directory does not exists or cannot be read", "El directorio no existe o no puede ser leído"
+"Testing", "Pruebas"
+"Production", "Producción"
+"Shipped By", "Enviado por"
+"Tracking Number", "Número de seguimiento"
+"Download Shipping Labels (Sticker Version)", "Descargar Guías (Versión Sticker)"

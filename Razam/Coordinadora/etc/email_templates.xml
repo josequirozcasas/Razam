@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="shipping_processing" label="Shipping in Process" file="shipping_process.html" type="html" module="Razam_Coordinadora" area="frontend"/>
+    <template id="shipping_delivered" label="Order delivered" file="shipping_delivered.html" type="html" module="Razam_Coordinadora" area="frontend"/>
+</config>

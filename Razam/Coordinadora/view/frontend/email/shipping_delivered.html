@@ -1,0 +1,28 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject {{trans "Your order has been delivered"}} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table class="shipment-track">
+    <tr>
+        <td>
+            <h2>{{trans 'Hi %customer' customer=$customer |raw}}</h2>
+            <p>
+                {{trans 'Your order %orderId has been delivered. Delivery date: %deliveryDate' orderId=$orderId deliveryDate=$deliveryDate |raw}}
+            </p>
+            <p>
+                {{trans 'If you have questions about your order, you can email us at <a href="mailto:%store_email">%store_email</a>' store_email=$store_email |raw}}
+                {{depend store_phone}},
+                {{trans 'or call us at <a href="tel:%store_phone">%store_phone</a>' store_phone=$store_phone |raw}}
+                {{/depend}}.
+            </p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="Guide" xsi:type="object">Razam\Coordinadora\Console\Command\Guide</item>
+                <item name="Shipping" xsi:type="object">Razam\Coordinadora\Console\Command\GenerateShipping</item>
+                <item name="Review" xsi:type="object">Razam\Coordinadora\Console\Command\ReviewShipment</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Magento\Shipping\Block\Tracking\Popup" type="Razam\Coordinadora\Block\Tracking\Popup"/>
+    <preference for="Magento\InventorySourceDeductionApi\Model\SourceDeductionService" type="Razam\Coordinadora\Model\SourceDeductionService"/>
+</config>

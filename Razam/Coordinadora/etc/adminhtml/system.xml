@@ -1,0 +1,178 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="carriers" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="1000" translate="label">
+			<group id="coordinadora" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Coordinadora</label>
+				<field id="active" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Enabled</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="name" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
+					<label>Method Name</label>
+				</field>
+
+				<field id="pricemc" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="text">
+					<label>Price Main Cities</label>
+					<validate>validate-number validate-zero-or-greater</validate>
+				</field>
+
+                                <field id="pricesc" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="text">
+                                        <label>Price Secondary Cities</label>
+                                        <validate>validate-number validate-zero-or-greater</validate>
+                                </field>
+
+                <field id="free_shipping" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="select">
+                    <label>Allow free shipping?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="free_shipping_rule" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50" translate="label" type="text">
+                    <label>Applicable amount to free shipping</label>
+                    <comment>The value entered will indicate the amount to be exceeded to apply free shipping.</comment>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                    <depends>
+                        <field id="free_shipping">1</field>
+                    </depends>
+                </field>
+				<field id="sort_order" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="60" translate="label" type="text">
+					<label>Sort Order</label>
+				</field>
+				<field id="title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="70" translate="label" type="text">
+					<label>Title</label>
+				</field>
+				<field id="sallowspecific" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="80" translate="label" type="select">
+					<label>Ship to Applicable Countries</label>
+					<frontend_class>shipping-applicable-country</frontend_class>
+					<source_model>Magento\Shipping\Model\Config\Source\Allspecificcountries</source_model>
+				</field>
+				<field id="specificcountry" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="90" translate="label" type="multiselect">
+					<label>Ship to Specific Countries</label>
+					<can_be_empty>1</can_be_empty>
+					<source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+				</field>
+                <field id="allow_regions" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="90" translate="label" type="multiselect">
+                    <label>Ship to Specific Regions</label>
+                    <can_be_empty>1</can_be_empty>
+                    <source_model>Razam\Coordinadora\Model\Config\Source\Region</source_model>
+                </field>
+
+
+		<field id="allow_main_states" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="90" translate="label" type="multiselect">
+                    <label>Ship to Specific Main States</label>
+                    <can_be_empty>1</can_be_empty>
+                    <source_model>Razam\Coordinadora\Model\Config\Source\States</source_model>
+                </field>
+
+                <field id="allow_secondary_states" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="90" translate="label" type="multiselect">
+                    <label>Ship to Specific Secondary States</label>
+                    <can_be_empty>1</can_be_empty>
+                    <source_model>Razam\Coordinadora\Model\Config\Source\States</source_model>
+                </field>
+
+
+				<field id="specificerrmsg" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label" type="textarea">
+					<label>Displayed Error Message</label>
+				</field>
+                <field id="mode" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110" translate="label" type="select">
+                    <label>Mode</label>
+                    <source_model>Razam\Coordinadora\Model\Config\Source\Mode</source_model>
+                    <comment>Operation mode. This change and load the credentials below.</comment>
+                </field>
+                <field id="username_test" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="120" translate="label" type="text">
+                    <label>User</label>
+                    <comment>User to login in Coordinadora server.</comment>
+                    <depends>
+                        <field id="mode">test</field>
+                    </depends>
+                </field>
+                <field id="username_prod" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="120" translate="label" type="text">
+                    <label>User</label>
+                    <comment>User to login in Coordinadora server.</comment>
+                    <depends>
+                        <field id="mode">prod</field>
+                    </depends>
+                </field>
+                <field id="password_test" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="130" translate="label" type="obscure">
+                    <label>Password</label>
+                    <depends>
+                        <field id="mode">test</field>
+                    </depends>
+                </field>
+                <field id="password_prod" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="130" translate="label" type="obscure">
+                    <label>Password</label>
+                    <depends>
+                        <field id="mode">prod</field>
+                    </depends>
+                </field>
+                <field id="sender_code_test" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="140" translate="label" type="text">
+                    <label>ID Remitente</label>
+                    <comment>Identificador para cargue de datos del remitente.</comment>
+                    <depends>
+                        <field id="mode">test</field>
+                    </depends>
+                </field>
+                <field id="sender_code_prod" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="140" translate="label" type="text">
+                    <label>ID Remitente</label>
+                    <comment>Identificador para cargue de datos del remitente.</comment>
+                    <depends>
+                        <field id="mode">prod</field>
+                    </depends>
+                </field>
+                <field id="id_client_test" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="150" translate="label" type="text">
+                    <label>Client ID</label>
+                    <comment>This ID it's provided by Coordinadora Administrator.</comment>
+                    <depends>
+                        <field id="mode">test</field>
+                    </depends>
+                </field>
+                <field id="id_client_prod" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="150" translate="label" type="text">
+                    <label>Client ID</label>
+                    <comment>This ID it's provided by Coordinadora Administrator.</comment>
+                    <depends>
+                        <field id="mode">prod</field>
+                    </depends>
+                </field>
+                <field id="url_tracking" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="160" translate="label" type="text">
+                    <label>URL Tracking</label>
+                    <comment>Url for the tracking guides.</comment>
+                </field>
+                <field id="tracking_apikey" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="162" translate="label" type="text">
+                    <label>Tracking API Key</label>
+                    <comment>API Key for the shipment tracking service.</comment>
+                    <depends>
+                        <field id="mode">prod</field>
+                    </depends>
+                </field>
+                <field id="tracking_password" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="164" translate="label" type="obscure">
+                    <label>Tracking API Password</label>
+                    <comment>Password for the shipment tracking service.</comment>
+                    <depends>
+                        <field id="mode">prod</field>
+                    </depends>
+                </field>
+                <field id="url_webservice_test" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="170" translate="label" type="text">
+                    <label>URL Webservice</label>
+                    <comment>Url provided for testing requests, it only works on a sandbox.</comment>
+                    <depends>
+                        <field id="mode">test</field>
+                    </depends>
+                </field>
+                <field id="url_webservice_prod" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="170" translate="label" type="text">
+                    <label>URL Webservice</label>
+                    <comment>Url provided for production requests.</comment>
+                    <depends>
+                        <field id="mode">prod</field>
+                    </depends>
+                </field>
+                <field id="allow_pdf" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="180" translate="label" type="select">
+                    <label>Allow save guide files?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Allow save the shipping guide and shipment labels.
+                        The default directory is the Magento public directory. Ex: pub/guias.
+                    </comment>
+                </field>
+			</group>
+		</section>
+	</system>
+</config>
